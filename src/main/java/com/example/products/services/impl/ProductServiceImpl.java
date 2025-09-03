@@ -29,12 +29,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(String id) {
-        return null;
+        return productRepository.findById(id)
+        .orElseThrow(()  -> new RuntimeException( "Product not found with id" + id));
     }
 
     @Override
     public Product update(String id, Product product) {
-        return null;
+        Product existingProduct = getById(id);
+        existingProduct.setName(product.getName());
+        existingProduct.setPrice(product.getPrice());
+        return productRepository.save(existingProduct);
     }
 
     @Override
@@ -45,11 +49,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product purchase(String id, int quantity) {
-        return null;
+        Product existingProduct = getById(id);
+        if (existingProduct.getStock() < quantity) {
+            throw new RuntimeException("Not enough stock for product with id" + id);
+        }
+        existingProduct.setStock(existingProduct.getStock() - quantity);
+        return productRepository.save(existingProduct);
+
     }
+
 
     @Override
     public Product addStock(String id, int quantity) {
-        return null;
+        Product existingProduct = getById(id);
+        existingProduct.setStock(existingProduct.getStock() + quantity);
+        return productRepository.save(existingProduct);
     }
 }
