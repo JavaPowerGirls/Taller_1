@@ -1,22 +1,22 @@
 package com.example.products.services;
 
-import com.example.products.model.Product;
 import java.util.List;
 
-/**
- * Service interface for managing Products.
- */
+import com.example.products.dto.ProductCreateDto;
+import com.example.products.dto.ProductUpdateDto;
+import com.example.products.model.Product;
+
 
 
 public interface ProductService {
-
-    Product create(Product product);
+    
+    Product create(ProductCreateDto productCreateDto);
 
     List<Product> getAll();
 
     Product getById(String id);
-
-    Product update(String id, Product product);
+    
+    Product update(String id, ProductUpdateDto productUpdateDto);
 
     void delete(String id);
 

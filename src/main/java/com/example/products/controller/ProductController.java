@@ -1,22 +1,32 @@
 package com.example.products.controller;
 
-import com.example.products.model.Product;
-import com.example.products.repository.ProductRepository;
-import com.example.products.services.ProductService;
-import org.springframework.web.bind.annotation.RequestBody;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.products.dto.ProductCreateDto;
+import com.example.products.dto.ProductUpdateDto;
+import com.example.products.model.Product;
+import com.example.products.services.ProductService;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
+    
     public ProductController(ProductService productService){
      this.productService = productService;
-
     }
 
     @GetMapping
@@ -29,13 +39,13 @@ public class ProductController {
         return productService.getById(id);
     }
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.create(product);
+    public Product createProduct(@Valid @RequestBody ProductCreateDto productCreateDto) {
+        return productService.create(productCreateDto);
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable String id, @RequestBody Product product) {
-        return productService.update(id, product);
+    public Product updateProduct(@PathVariable String id, @Valid @RequestBody ProductUpdateDto productUpdateDto) {
+        return productService.update(id, productUpdateDto);
     }
 
     @DeleteMapping("/{id}")
