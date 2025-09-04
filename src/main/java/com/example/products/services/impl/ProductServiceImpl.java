@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAll() {
         return productRepository.findAll()
                 .stream() // convierte a stream
-                .sorted((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName())) //ordena alfabeticamente e ignara mayus y minus
+                .sorted((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName())) //ordena alfabeticamente
                 .toList(); //convierte a lista
     }
 

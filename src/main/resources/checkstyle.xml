@@ -20,9 +20,7 @@
 
         <!-- Javadoc: solo métodos públicos -->
         <module name="JavadocMethod">
-            <property name="scope" value="public"/>
             <property name="allowMissingParamTags" value="true"/>
-            <property name="allowMissingThrowsTags" value="true"/>
             <property name="allowMissingReturnTag" value="true"/>
         </module>
 
