@@ -15,6 +15,7 @@ tags:
 paths:
   /products:
     get:
+      operationId: getAllProducts
       tags:
         - products
       summary: Get all products
@@ -39,6 +40,7 @@ paths:
                       price: 999.99
                       stock: 5
     post:
+      operationId: createProduct
       tags:
         - products
       summary: Create a new product
@@ -62,6 +64,7 @@ paths:
 
   /products/{id}:
     get:
+      operationId: getProductById
       tags:
         - products
       summary: Get product by ID
@@ -82,6 +85,7 @@ paths:
           description: Product not found
 
     put:
+      operationId: updateProduct
       tags:
         - products
       summary: Update product (except stock)
@@ -111,6 +115,7 @@ paths:
           description: Product not found
 
     delete:
+      operationId: deleteProduct
       tags:
         - products
       summary: Delete product
@@ -128,6 +133,7 @@ paths:
 
   /products/{id}/addStock:
     patch:
+      operationId: addStock
       tags:
         - products
       summary: Add stock to product
@@ -155,6 +161,7 @@ paths:
 
   /products/{id}/purchase:
     post:
+      operationId: purchaseProduct
       tags:
         - products
       summary: Purchase product
